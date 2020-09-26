@@ -55,7 +55,9 @@ rotate_seq_align<-function(idf){
     final.score<-max.a
   } else{
     final.rotation<-seq.list[which(score.b == max.b)[1]] %>%
-    reverseComplement()
+    DNAString() %>%
+    reverseComplement() %>%
+    as.character()
     final.score<-max.b
   }
   idf<-mutate(idf,rotated_seq = final.rotation,
