@@ -43,8 +43,8 @@ while ( TRUE ) {
     next
   }
   
-  aln_global_stats<-aln_stats(aln_global)
-  aln_local_stats<-aln_stats(aln_local)
+  aln_global_stats<-aln_stats(aln_global,hsa_let7)
+  aln_local_stats<-aln_stats(aln_local,hsa_let7)
   
   write_lines(paste(name,aln_global_stats,aln_local_stats,sep="\t"),path=con2,append=T)
 }
