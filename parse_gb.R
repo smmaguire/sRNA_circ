@@ -54,7 +54,8 @@ rotate_seq_align<-function(idf){
     final.rotation<-seq.list[which(score.a == max.a)[1]]
     final.score<-max.a
   } else{
-    final.rotation<-seq.list[which(score.b == max.b)[1]]
+    final.rotation<-seq.list[which(score.b == max.b)[1]] %>%
+    reverseComplement()
     final.score<-max.b
   }
   idf<-mutate(idf,rotated_seq = final.rotation,

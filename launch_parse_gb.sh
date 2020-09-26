@@ -1,6 +1,6 @@
 #!/bin/bash
-data_path=/home/smaguire/work/sRNA_circ/spades/data2/
-output_main=/home/smaguire/work/sRNA_circ/spades/output/
+data_path=/home/smaguire/work/sRNA_circ/spades/test_oligo2/data/
+output_main=/home/smaguire/work/sRNA_circ/spades/test_oligo2/output/
 for j in $( ls -d $data_path"barcode"*); do
     barc=${j#$data_path}
     mkdir -p $output_main$barc
@@ -10,6 +10,6 @@ for j in $( ls -d $data_path"barcode"*); do
         echo $output_dir
         echo "input directory"
         echo $i
-        qsub -v input_dir=$i,output_dir_current=$output_dir parse_gb.sh  
+        qsub -v input_dir=$i,output_dir_current=$output_dir parse_gb.sh
     done
 done
