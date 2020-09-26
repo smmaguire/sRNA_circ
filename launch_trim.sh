@@ -1,5 +1,5 @@
 #!/bin/bash
-data_path=/home/smaguire/work/sRNA_circ/spades/output/
+data_path=/home/smaguire/work/sRNA_circ/spades/test_oligo2/output/
 adapter_path=/home/smaguire/work/sRNA_circ/spades/adapter.fa
 for j in $( ls -d $data_path"barcode"*); do
      barc=${j#$data_path}

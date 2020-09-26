@@ -18,4 +18,4 @@ flexbar -r "aggregated_"${bc}"_output.fasta" \
 -R "aggregated_"${bc}"trimmed_output.fasta" \
 --adapter-error-rate 0.2 \
 --adapter-min-overlap 6
-Rscript /home/smaguire/work/sRNA_circ/spades/scripts/process_trim.R ${current_dir}
+Rscript /home/smaguire/work/sRNA_circ/spades/scripts/sRNA_circ/process_trim.R ${current_dir}
