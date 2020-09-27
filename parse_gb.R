@@ -133,6 +133,9 @@ for(gb in files){
     }
   }
   close(con)
+  if(length(rep_unit_seq)==0){
+    next
+  }
   parsed.items<-data.frame(read.id,full_seq_len,seq_len,period,rpt_num,period_score,rep_unit_seq,unmasked_seq)
   parsed.items2<-rotate_seq_align(parsed.items)
   if(parsed.items2$aln_score <= 0){

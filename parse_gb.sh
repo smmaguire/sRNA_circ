@@ -33,8 +33,7 @@ echo "#################################################"
 echo "Getting line count"
 echo "#################################################"
 
-line_count=$(wc -l ${file_name}"_trimmed_output.fasta")
-
+line_count=`wc -l ${file_name}"_trimmed_output.fasta" | cut -f1 -d' '`
 echo $line_count
 
 echo "#################################################"
