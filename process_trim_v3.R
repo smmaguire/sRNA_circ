@@ -61,3 +61,7 @@ while ( TRUE ) {
     }
 }
 close(con)
+close(con2)
+
+
+
