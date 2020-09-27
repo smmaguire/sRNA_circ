@@ -10,6 +10,7 @@ source activate sRNA_circ_spades
 
 echo "#################################################"
 echo "Starting to parse the genbank"
+echo "file is: "${file_name}
 echo "#################################################"
 
 Rscript parse_gb.R ${input_dir} ${output_dir_current} ${file_name}
@@ -32,7 +33,7 @@ echo "#################################################"
 echo "Getting line count"
 echo "#################################################"
 
-line_count=wc -l ${file_name}"_trimmed_output.fasta"
+line_count=$(wc -l ${file_name}"_trimmed_output.fasta")
 
 echo $line_count
 
