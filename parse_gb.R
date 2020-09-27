@@ -6,12 +6,9 @@ library(stringr)
 args <- commandArgs(trailingOnly = TRUE)
 setwd(args[1])
 files<-list.files(pattern="repeat.gbk")
-rand.string<-stringi::stri_rand_strings(1,20)
-##output_tb<-paste0("/mnt/home2/smaguire/sRNA_circ/spades","/","temp_tb_",rand.string,".tab")
-##output_fasta<-paste0("/mnt/home2/smaguire/sRNA_circ/spades","/","temp_fa_",rand.string,".fasta")
 
-output_tb<-paste0(args[2],"/","temp_tb_",rand.string,".tab")
-output_fasta<-paste0(args[2],"/","temp_fa_",rand.string,".fasta")
+output_tb<-paste0(args[2],"/","temp_tb_",args[3],".tab")
+output_fasta<-paste0(args[2],"/","temp_fa_",args[3],".fasta")
 
 # function to rotate and align sequences to the adapter sequence
 rotate_seq_align<-function(idf){

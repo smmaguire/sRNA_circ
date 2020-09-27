@@ -8,4 +8,6 @@
 
 source activate sRNA_circ_spades
 
-Rscript parse_gb.R ${input_dir} ${output_dir_current}
+Rscript parse_gb.R ${input_dir} ${output_dir_current} ${file_name}
+
+echo "run_now???"
