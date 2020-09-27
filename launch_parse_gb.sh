@@ -10,6 +10,6 @@ for j in $( ls -d $data_path"barcode"*); do
         echo $output_dir
         echo "input directory"
         echo $i
-        qsub -v input_dir=$i,output_dir_current=$output_dir parse_gb.sh
+        #qsub -v input_dir=$i,output_dir_current=$output_dir parse_gb.sh
     done
 done
