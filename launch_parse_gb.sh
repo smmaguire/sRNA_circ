@@ -10,6 +10,9 @@ for j in $( ls -d $data_path"barcode"*); do
         echo $output_dir
         echo "input directory"
         echo $i
+        echo $j
+        #new_name=${i#$j/}
+        #new_name=${new_name%.fastq}
         #qsub -v input_dir=$i,output_dir_current=$output_dir parse_gb.sh
     done
 done
