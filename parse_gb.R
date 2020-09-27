@@ -6,7 +6,9 @@ library(stringr)
 args <- commandArgs(trailingOnly = TRUE)
 setwd(args[1])
 files<-list.files(pattern="repeat.gbk")
-
+max.files<-length(files)
+file_count<-0
+pb<-txtProgressBar(min=0,max=max.files,style=3)
 output_tb<-paste0(args[2],"/","temp_tb_",args[3],".tab")
 output_fasta<-paste0(args[2],"/","temp_fa_",args[3],".fasta")
 
@@ -66,6 +68,7 @@ rotate_seq_align<-function(idf){
 # fasta and tab deliminated file.
 
 for(gb in files){
+  file_count<-file_count+1
   con2  <- file(gb, open = "r")
   full_length_line <- readLines(con2,n=1)
   split1<-str_split(str_squish(full_length_line)," ",simplify=T)
@@ -145,4 +148,9 @@ for(gb in files){
   fasta_line<-c(">",as.character(parsed.items2$read.id),"\n",parsed.items2$rotated_seq,"\n")
   cat(write.line,file=output_tb,sep="\t",append=T)
   cat(fasta_line,file=output_fasta,sep="",append=T)
+  setTxtProgressBar(pb,file_count)
 }
+
+close(pb)
+
+
