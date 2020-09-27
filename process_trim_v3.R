@@ -23,7 +23,7 @@ hsa_let7 <- DNAStringSet("TGAGGTAGTAGGTTGTATAGTT")
 con <- file(file, open = "r")
 con2<-file(paste(args[2],"_alignment_stats.txt",sep="_"),open = "w")
 
-pb <- txtProgressBar(min=0,max=args[3],style=3)
+pb <- txtProgressBar(min=0,max=as.numeric(args[3]),style=3)
 line_count<-0
 while ( TRUE ) {
   line = readLines(con, n = 1)
