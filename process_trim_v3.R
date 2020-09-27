@@ -14,20 +14,21 @@ aln_stats<-function(alignment,reference){
 }
 
 args <- commandArgs(trailingOnly = TRUE)
-setwd(args[1])
-file<-list.files(pattern="trimmed_output.fasta")
+file<-args[1]
 
-barcode<-str_split(file,"_",simplify=T)[,2]
 start<-F
 seq<-""
 hsa_let7 <- DNAStringSet("TGAGGTAGTAGGTTGTATAGTT")
 
 con <- file(file, open = "r")
-con2<-file(paste(barcode,"alignment_stats.txt",sep="_"),open = "w")
+con2<-file(paste(args[2],"_alignment_stats.txt",sep="_"),open = "w")
 
-
+pb <- txtProgressBar(min=0,max=args[3],style=3)
+line_count<-0
 while ( TRUE ) {
   line = readLines(con, n = 1)
+  line_count<-line_count+1
+  setTxtProgressBar(pb,line_count)
   if ( length(line) == 0 ) {
      break
    }
@@ -43,6 +44,7 @@ while ( TRUE ) {
   aln_mouse <- pairwiseAlignment("AAGAAAGATTGCAAGAACTGCTAATTCATGCTTCCATGTTTAAAAACATGGCTTTCTTAC",
                                  seq,type="local",
                                  gapOpening = 1, gapExtension = 1)
+  
   if(score(aln_local) < score(aln_mouse)){
     next
   }
@@ -60,6 +62,7 @@ while ( TRUE ) {
       seq<-paste0(seq,line)
     }
 }
+close(pb)
 close(con)
 close(con2)
 

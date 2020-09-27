@@ -1,6 +1,8 @@
 #!/bin/bash
 data_path=/home/smaguire/work/sRNA_circ/spades/test_oligo2/data/
 output_main=/home/smaguire/work/sRNA_circ/spades/test_oligo2/output/
+adapter_path=/home/smaguire/work/sRNA_circ/spades/adapter.fa
+
 for j in $( ls -d $data_path"barcode"*); do
     barc=${j#$data_path}
     mkdir -p $output_main$barc
@@ -13,6 +15,6 @@ for j in $( ls -d $data_path"barcode"*); do
         new_name=${i#$j/}
         new_name=${new_name%"_output"}
         echo $new_name
-        qsub -v input_dir=$i,output_dir_current=$output_dir,file_name=$new_name parse_gb.sh
+        qsub -v input_dir=$i,output_dir_current=$output_dir,file_name=$new_name,adapter=$adapter_path,bc=$barc parse_gb.sh
     done
 done
