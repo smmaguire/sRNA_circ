@@ -39,6 +39,7 @@ while ( TRUE ) {
   aln_mouse <- pairwiseAlignment("AAGAAAGATTGCAAGAACTGCTAATTCATGCTTCCATGTTTAAAAACATGGCTTTCTTAC",
                                  lines[2],type="local",
                                  gapOpening = 1, gapExtension = 1)
+  
   if(score(aln_local) < score(aln_mouse)){
     next
   }
