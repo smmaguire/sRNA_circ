@@ -53,6 +53,8 @@ while ( TRUE ) {
   aln_local_stats<-aln_stats(aln_local,hsa_let7)
   
   write_lines(paste(name,aln_global_stats,aln_local_stats,sep="\t"),path=con2,append=T)
+  seq<-""
+  start<-!start
   }
     if(!start & str_detect(line,">")){
       name<-str_split(line,">",simplify=T)[2]
@@ -65,6 +67,3 @@ while ( TRUE ) {
 close(pb)
 close(con)
 close(con2)
-
-
-
