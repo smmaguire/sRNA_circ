@@ -45,12 +45,14 @@ while ( TRUE ) {
                                  gapOpening = 1, gapExtension = 1)
   
   if(score(aln_local) < score(aln_mouse)){
-    next
+    flag<-T
+  } else{
+    flag<-F
   }
   
   aln_global_stats<-aln_stats(aln_global,hsa_let7)
   aln_local_stats<-aln_stats(aln_local,hsa_let7)
-  write.line<-paste(name,aln_global_stats,aln_local_stats,sep="\t")
+  write.line<-paste(name,aln_global_stats,aln_local_stats,flag,sep="\t")
   write.line<-paste0(write.line,"\n")
   cat(write.line,file=write_file,append = T)
   seq<-""
