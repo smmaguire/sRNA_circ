@@ -46,8 +46,8 @@ while ( TRUE ) {
   
   aln_global_stats<-aln_stats(aln_global,hsa_let7)
   aln_local_stats<-aln_stats(aln_local,hsa_let7)
-  
-  write_lines(paste(name,aln_global_stats,aln_local_stats,sep="\t"),path=con2,append=T)
+  write.line<-paste(name,aln_global_stats,aln_local_stats,sep="\t")
+  write.line<-paste0(write.line,"\n")
+  cat(write.line,file=paste0(barcode,"_","processed.tab"),append = T)
 }
 close(con)
-close(con2)

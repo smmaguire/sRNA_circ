@@ -21,8 +21,7 @@ seq<-""
 hsa_let7 <- DNAStringSet("TGAGGTAGTAGGTTGTATAGTT")
 
 con <- file(file, open = "r")
-con2<-file(paste(args[2],"_alignment_stats.txt",sep="_"),open = "w")
-
+write_file <- paste(args[2],"_alignment_stats.txt",sep="_")
 pb <- txtProgressBar(min=0,max=as.numeric(args[3]),style=3)
 line_count<-0
 while ( TRUE ) {
@@ -51,8 +50,9 @@ while ( TRUE ) {
   
   aln_global_stats<-aln_stats(aln_global,hsa_let7)
   aln_local_stats<-aln_stats(aln_local,hsa_let7)
-  
-  write_lines(paste(name,aln_global_stats,aln_local_stats,sep="\t"),path=con2,append=T)
+  write.line<-paste(name,aln_global_stats,aln_local_stats,sep="\t")
+  write.line<-paste0(write.line,"\n")
+  cat(write.line,file=write_file,append = T)
   seq<-""
   start<-!start
   }
@@ -66,4 +66,3 @@ while ( TRUE ) {
 }
 close(pb)
 close(con)
-close(con2)
