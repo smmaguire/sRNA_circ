@@ -9,8 +9,8 @@
 barcode=${barcode}
 work_dir="/home/smaguire/work/sRNA_circ/spades/"
 
-mkdir -p $work_dir"data2/"$barcode
-new_data_dir=$work_dir"data2/"$barcode
+mkdir -p $work_dir"mirxplore_output/"$barcode
+new_data_dir=$work_dir"mirxplore_output/"$barcode
 mkdir -p $new_data_dir/${name}
 mkdir -p $new_data_dir/${name}_output
 cd $new_data_dir/${name}
