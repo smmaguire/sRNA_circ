@@ -13,7 +13,7 @@ echo "Starting to parse the genbank"
 echo "file is: "${file_name}
 echo "#################################################"
 
-#Rscript parse_gb.R ${input_dir} ${output_dir_current} ${file_name}
+Rscript parse_gb.R ${input_dir} ${output_dir_current} ${file_name}
 
 cd ${output_dir_current}
 
@@ -21,25 +21,41 @@ echo "#################################################"
 echo "Running flexbar"
 echo "#################################################"
 
-# flexbar -r "temp_fa_"${file_name}".fasta" \
-# -a ${adapter} \
-# --adapter-trim-end ANY \
-# --min-read-length 10 \
-# -R ${file_name}"_trimmed_output.fasta" \
-# --adapter-error-rate 0.2 \
-# --adapter-min-overlap 6
+flexbar -r "temp_fa_"${file_name}".fasta" \
+-a ${adapter} \
+--adapter-trim-end ANY \
+--min-read-length 10 \
+-R ${file_name}"_trimmed_output.fasta" \
+--adapter-error-rate 0.2 \
+--adapter-min-overlap 6
+
+# echo "#################################################"
+# echo "Getting line count"
+# echo "#################################################"
+
+# line_count=`wc -l ${file_name}"_trimmed_output.fasta" | cut -f1 -d' '`
+# echo $line_count
+
+# echo "#################################################"
+# echo "Getting alignment stats"
+# echo "#################################################"
+
+# Rscript /home/smaguire/work/sRNA_circ/spades/scripts/sRNA_circ/process_trim_v3.R ${file_name}"_trimmed_output.fasta" ${file_name} ${line_count}
 
 echo "#################################################"
-echo "Getting line count"
+echo "Mapping MirXplore"
 echo "#################################################"
 
-line_count=`wc -l ${file_name}"_trimmed_output.fasta" | cut -f1 -d' '`
-echo $line_count
+source activate shortstack
+index="/home/smaguire/work/unblock_remakes/data/mirexplore/genome/miRexplore"
+##bowtie -n 1 -l 10 -m 100 -k 1 --sam --best --strata $index $downsample_dir/${name}.fastq | samtools view -b - | samtools sort -o $mapped_dir${name}.bam -
+bowtie -v 2 -m 100 -k 1 --sam --best --strata $index ${file_name}"_trimmed_output.fasta" | samtools view -b - | samtools sort -o ${file_name}"_mapped.bam" -
 
 echo "#################################################"
-echo "Getting alignment stats"
+echo "Counting miRNAs"
 echo "#################################################"
 
-Rscript /home/smaguire/work/sRNA_circ/spades/scripts/sRNA_circ/process_trim_v3.R ${file_name}"_trimmed_output.fasta" ${file_name} ${line_count}
-
+samtools index ${file_name}"_mapped.bam"
+samtools idxstats ${file_name}"_mapped.bam" > ${file_name}"_miRNA_counts.txt"
+samtools flagstat ${file_name}"_mapped.bam" > ${file_name}"_mapping_stats.txt"
 
