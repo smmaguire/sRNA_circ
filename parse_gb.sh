@@ -6,28 +6,28 @@
 #$ -pe smp 1
 #$ -m e
 
-source activate sRNA_circ_spades
+####source activate sRNA_circ_spades
 
 echo "#################################################"
 echo "Starting to parse the genbank"
 echo "file is: "${file_name}
 echo "#################################################"
 
-Rscript parse_gb.R ${input_dir} ${output_dir_current} ${file_name}
+# Rscript parse_gb.R ${input_dir} ${output_dir_current} ${file_name}
 
-cd ${output_dir_current}
+# cd ${output_dir_current}
 
 echo "#################################################"
 echo "Running flexbar"
 echo "#################################################"
 
-flexbar -r "temp_fa_"${file_name}".fasta" \
--a ${adapter} \
---adapter-trim-end ANY \
---min-read-length 10 \
--R ${file_name}"_trimmed_output.fasta" \
---adapter-error-rate 0.2 \
---adapter-min-overlap 6
+# flexbar -r "temp_fa_"${file_name}".fasta" \
+# -a ${adapter} \
+# --adapter-trim-end ANY \
+# --min-read-length 10 \
+# -R ${file_name}"_trimmed_output.fasta" \
+# --adapter-error-rate 0.2 \
+# --adapter-min-overlap 6
 
 # echo "#################################################"
 # echo "Getting line count"
@@ -47,9 +47,9 @@ echo "Mapping MirXplore"
 echo "#################################################"
 
 source activate shortstack
-index="/home/smaguire/work/unblock_remakes/data/mirexplore/genome/miRexplore"
+#index="/home/smaguire/work/unblock_remakes/data/mirexplore/genome/miRexplore"
 ##bowtie -n 1 -l 10 -m 100 -k 1 --sam --best --strata $index $downsample_dir/${name}.fastq | samtools view -b - | samtools sort -o $mapped_dir${name}.bam -
-bowtie -v 2 -m 100 -k 1 --sam --best --strata $index ${file_name}"_trimmed_output.fasta" | samtools view -b - | samtools sort -o ${file_name}"_mapped.bam" -
+bowtie -v 2 -m 100 -k 1 --sam --best --strata $index -f ${file_name}"_trimmed_output.fasta" | samtools view -b - | samtools sort -o ${file_name}"_mapped.bam" -
 
 echo "#################################################"
 echo "Counting miRNAs"
