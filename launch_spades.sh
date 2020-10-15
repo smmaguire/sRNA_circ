@@ -1,5 +1,5 @@
 #!/bin/bash
-data_path=/home/smaguire/work/sRNA_circ/spades/aggregated_mirx_data/
+data_path=/home/smaguire/work/sRNA_circ/spades/aggregated_human_data/
 
 for j in $( ls -d $data_path"barcode"*); do
     barc=${j#$data_path}
