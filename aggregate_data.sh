@@ -6,9 +6,9 @@
 #$ -pe smp 1
 #$ -m e
 
-data_path=/mnt/nanopore/Sean_Maguire2/sRNA_nanopore_final/FC2_mirX/basecalled/
-mkdir -p /home/smaguire/work/sRNA_circ/spades/aggregated_mirx_data/
-agg_path=/home/smaguire/work/sRNA_circ/spades/aggregated_mirx_data/
+data_path=/mnt/nanopore/Sean_Maguire2/sRNA_nanopore_final/human_brain/
+mkdir -p /home/smaguire/work/sRNA_circ/spades/aggregated_human_data
+agg_path=/home/smaguire/work/sRNA_circ/spades/aggregated_human_data/
 
 for j in $( ls -d $data_path"barcode"*); do
     barc=${j#$data_path}
