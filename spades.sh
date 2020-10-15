@@ -4,6 +4,7 @@
 #$ -j y
 #$ -S /bin/bash
 #$ -pe smp 16
+#$ -P longrun
 #$ -m e
 
 barcode=${barcode}
