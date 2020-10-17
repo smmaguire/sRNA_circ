@@ -83,3 +83,14 @@ p2<-data %>%
   theme_cowplot()
 
 plot_grid(p1,p2,p3,align = "h")
+
+mda.data<-
+data %>%
+  group_by(amp,ID) %>%
+  summarise(mean_count = mean(normalized_reads)) %>%
+  filter(amp == "MDA") %>%
+  as.data.frame()
+
+
+mda.data[(order(mda.data$mean_count,decreasing=T)),]
+            
