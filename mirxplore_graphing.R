@@ -93,4 +93,27 @@ data %>%
 
 
 mda.data[(order(mda.data$mean_count,decreasing=T)),]
+
+
+data %>%
+  mutate(amp = factor(amp,levels=c("No Amp","MDA")),
+         within2 = case_when(normalized_reads>=0.5 & normalized_reads <= 2 ~ TRUE,
+                             TRUE ~ FALSE)) %>%
+  group_by(amp,barcode,within2) %>%
+  summarise(count=n()) %>%
+  ungroup() %>%
+  pivot_wider(id_cols = c(amp,barcode),names_from=within2,values_from=count) %>%
+  mutate(total=`FALSE`+`TRUE`,
+         percent_within2 = (`TRUE`/total)*100) %>%
+  group_by(amp) %>%
+  summarise(mean_percent_within2 = mean(percent_within2),
+            sd_percent_within2 = sd(percent_within2)) %>%
+  ggplot(aes(x=amp,y=mean_percent_within2,fill=amp))+
+  geom_col()+
+  geom_errorbar(aes(ymin=mean_percent_within2 - sd_percent_within2,
+                    ymax=mean_percent_within2 + sd_percent_within2)) +
+  theme_cowplot()+
+  ylab("Percentage of miRNA within 2-fold of the expected value") +
+  xlab(NULL) + ylim(c(0,80)) +
+  guides(fill=F)
             
