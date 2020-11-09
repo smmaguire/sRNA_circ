@@ -1,6 +1,6 @@
 #!/bin/bash
-data_path=/home/smaguire/work/sRNA_circ/spades/mirxplore_output/
-output_main=/home/smaguire/work/sRNA_circ/spades/mirxplore_output/output/
+data_path=/home/smaguire/work/sRNA_circ/spades/human_brain_output/
+output_main=/home/smaguire/work/sRNA_circ/spades/human_brain_output/output/
 adapter_path=/home/smaguire/work/sRNA_circ/spades/adapter.fa
 
 for j in $( ls -d $data_path"barcode"*); do

@@ -42,16 +42,16 @@ flexbar -r "temp_fa_"${file_name}".fasta" \
 
 # Rscript /home/smaguire/work/sRNA_circ/spades/scripts/sRNA_circ/process_trim_v3.R ${file_name}"_trimmed_output.fasta" ${file_name} ${line_count}
 
-echo "#################################################"
-echo "Mapping MirXplore"
-echo "#################################################"
+#echo "#################################################"
+#echo "Mapping MirXplore"
+#echo "#################################################"
 
 #source activate shortstack
 #index="/home/smaguire/work/unblock_remakes/data/mirexplore/genome/miRexplore"
 ##bowtie -n 1 -l 10 -m 100 -k 1 --sam --best --strata $index $downsample_dir/${name}.fastq | samtools view -b - | samtools sort -o $mapped_dir${name}.bam -
 #bowtie -v 2 -m 100 -k 1 --sam --best --strata $index -f ${file_name}"_trimmed_output.fasta" | samtools view -b - | samtools sort -o ${file_name}"_mapped.bam" -
 
-bbmap.sh in=${file_name}"_trimmed_output.fasta" covstats=${file_name}"_covstats.txt" ref=/home/smaguire/work/unblock_remakes/data/mirexplore/mwulf_data/miRxplore.fasta out=${file_name}"_mapped.bam" nodisk local
+#bbmap.sh in=${file_name}"_trimmed_output.fasta" covstats=${file_name}"_covstats.txt" ref=/home/smaguire/work/unblock_remakes/data/mirexplore/mwulf_data/miRxplore.fasta out=${file_name}"_mapped.bam" nodisk local
 
 # echo "#################################################"
 # echo "Counting miRNAs"
