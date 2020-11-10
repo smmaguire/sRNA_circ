@@ -6,28 +6,29 @@
 #$ -pe smp 1
 #$ -m e
 
-source activate sRNA_circ_spades
+source activate bbtools
+#source activate sRNA_circ_spades
 
-echo "#################################################"
-echo "Starting to parse the genbank"
-echo "file is: "${file_name}
-echo "#################################################"
+#echo "#################################################"
+#echo "Starting to parse the genbank"
+#echo "file is: "${file_name}
+#echo "#################################################"
 
-Rscript parse_gb.R ${input_dir} ${output_dir_current} ${file_name}
+#Rscript parse_gb.R ${input_dir} ${output_dir_current} ${file_name}
 
 cd ${output_dir_current}
 
-echo "#################################################"
-echo "Running flexbar"
-echo "#################################################"
+#echo "#################################################"
+#echo "Running flexbar"
+#echo "#################################################"
 
-flexbar -r "temp_fa_"${file_name}".fasta" \
--a ${adapter} \
---adapter-trim-end ANY \
---min-read-length 10 \
--R ${file_name}"_trimmed_output.fasta" \
---adapter-error-rate 0.2 \
---adapter-min-overlap 6
+# flexbar -r "temp_fa_"${file_name}".fasta" \
+# -a ${adapter} \
+# --adapter-trim-end ANY \
+# --min-read-length 10 \
+# -R ${file_name}"_trimmed_output.fasta" \
+# --adapter-error-rate 0.2 \
+# --adapter-min-overlap 6
 
 # echo "#################################################"
 # echo "Getting line count"
@@ -60,4 +61,19 @@ flexbar -r "temp_fa_"${file_name}".fasta" \
 # samtools index ${file_name}"_mapped.bam"
 # samtools idxstats ${file_name}"_mapped.bam" > ${file_name}"_miRNA_counts.txt"
 # samtools flagstat ${file_name}"_mapped.bam" > ${file_name}"_mapping_stats.txt"
+
+
+#echo "#################################################"
+#echo "Map Human"
+#echo "#################################################"
+
+bbmap.sh in=${file_name}"_trimmed_output.fasta" \
+ref=/home/smaguire/work/human_miRNA/star_pipeline/genome/GRCh38.fasta \
+path=/home/smaguire/work/sRNA_circ/spades/genome_ref \
+k=8 \
+local \
+minid=0.9
+
+
+
 
