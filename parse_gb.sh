@@ -3,7 +3,7 @@
 #$ -cwd
 #$ -j y
 #$ -S /bin/bash
-#$ -pe smp 1
+#$ -pe smp 4
 #$ -m e
 
 source activate bbtools
@@ -73,7 +73,15 @@ path=/home/smaguire/work/sRNA_circ/spades/genome_ref \
 k=10 \
 local \
 minid=0.9 \
-out=${file_name}.sam bamscript=bs.sh; sh bs.sh
+out=${file_name}.sam
+
+echo "#################################################"
+echo "Count miRNAs"
+echo "#################################################"
+
+source activate htseq
+htseq-count --nonunique=all ${file_name}.sam /home/smaguire/work/unblock_remakes/data/cancer_samples/genome/human_miRbase22.gtf > ${file_name}"_miRNA_counts.txt"
+htseq-count --nonunique=all ${file_name}.sam /home/smaguire/work/sRNA_circ/spades/genome_ref/GRCh38_tRNA.gtf > ${file_name}"_tRNA_counts.txt"
 
 
 
