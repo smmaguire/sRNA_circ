@@ -63,17 +63,17 @@ cd ${output_dir_current}
 # samtools flagstat ${file_name}"_mapped.bam" > ${file_name}"_mapping_stats.txt"
 
 
-#echo "#################################################"
-#echo "Map Human"
-#echo "#################################################"
+echo "#################################################"
+echo "Map Human"
+echo "#################################################"
 
 bbmap.sh in=${file_name}"_trimmed_output.fasta" \
 ref=/home/smaguire/work/human_miRNA/star_pipeline/genome/GRCh38.fasta \
 path=/home/smaguire/work/sRNA_circ/spades/genome_ref \
-k=8 \
+k=10 \
 local \
-minid=0.9
-
+minid=0.9 \
+out=${file_name}.sam bamscript=bs.sh; sh bs.sh
 
 
 
