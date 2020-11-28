@@ -33,9 +33,7 @@ echo "Count miRNAs"
 echo "#################################################"
 
 source activate htseq
-htseq-count --nonunique=all $bc"_mapped.sam" /home/smaguire/work/unblock_remakes/data/cancer_samples/genome/human_miRbase22.gtf > ${file_name}"_miRNA_counts.txt"
-htseq-count --nonunique=all $bc"_mapped.sam" /home/smaguire/work/sRNA_circ/spades/genome_ref/GRCh38_tRNA.gtf > ${file_name}"_tRNA_counts.txt"
-
-
-
-
+samtools sort $bc"_mapped.sam" > $bc"_mapped_sorted.sam"
+samtools index $bc"_mapped_sorted.sam"
+htseq-count --nonunique=all $bc"_mapped_sorted.sam" /home/smaguire/work/unblock_remakes/data/cancer_samples/genome/human_miRbase22.gtf > ${file_name}"_miRNA_counts.txt"
+htseq-count --nonunique=all $bc"_mapped_sorted.sam" /home/smaguire/work/sRNA_circ/spades/genome_ref/GRCh38_tRNA.gtf > ${file_name}"_tRNA_counts.txt"
