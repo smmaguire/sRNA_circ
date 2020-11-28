@@ -18,7 +18,7 @@ echo "#################################################"
 echo "Map Human"
 echo "#################################################"
 
-bbduk.sh in=$file out=$bc"_final_trimmed_filtered.fasta" minlen=16
+bbduk.sh in=$file out=$bc"_final_trimmed_filtered.fasta" minlen=16 overwrite=T
 
 bbmap.sh in=$bc"_final_trimmed_filtered.fasta" \
 ref=/home/smaguire/work/human_miRNA/star_pipeline/genome/GRCh38.fasta \
@@ -26,7 +26,8 @@ path=/home/smaguire/work/sRNA_circ/spades/genome_ref \
 k=12 \
 local \
 minid=0.9 \
-out=$bc"_mapped.sam"
+out=$bc"_mapped.sam" \
+overwrite=T
 
 echo "#################################################"
 echo "Count miRNAs"
