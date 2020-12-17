@@ -3,7 +3,7 @@
 #$ -cwd
 #$ -j y
 #$ -S /bin/bash
-#$ -pe smp 16
+#$ -pe smp 4
 #$ -m e
 
 
@@ -18,16 +18,21 @@ echo "#################################################"
 echo "Map Human"
 echo "#################################################"
 
+##### Trim short ##########
 bbduk.sh in=$file out=$bc"_final_trimmed_filtered.fasta" minlen=16 overwrite=T
 
-bbmap.sh in=$bc"_final_trimmed_filtered.fasta" \
-ref=/home/smaguire/work/human_miRNA/star_pipeline/genome/GRCh38.fasta \
-path=/home/smaguire/work/sRNA_circ/spades/genome_ref \
-k=12 \
-local \
-minid=0.9 \
-out=$bc"_mapped.sam" \
-overwrite=T
+# bbmap.sh in=$bc"_final_trimmed_filtered.fasta" \
+# ref=/home/smaguire/work/human_miRNA/star_pipeline/genome/GRCh38.fasta \
+# path=/home/smaguire/work/sRNA_circ/spades/genome_ref \
+# k=12 \
+# local \
+# minid=0.9 \
+# out=$bc"_mapped.sam" \
+# overwrite=T
+
+source activate shortstack
+index=/home/smaguire/work/unblock_remakes/data/cancer_samples/genome/igenome/Homo_sapiens/NCBI/GRCh38/Sequence/BowtieIndex/genome
+bowtie -v 3 -l 10 -m 100 -k 1 --sam --best --strata $index $bc"_final_trimmed_filtered.fasta" $bc"_mapped.sam"
 
 echo "#################################################"
 echo "Count miRNAs"
