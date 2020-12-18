@@ -44,5 +44,4 @@ bc=${file%"final_trimmed_output.fasta"}
 
 # htseq-count --nonunique=all -f bam -a 0 $bc"_mapped_sorted.bam" /home/smaguire/work/unblock_remakes/data/cancer_samples/genome/human_miRbase22.gtf > $bc"_miRNA_counts.txt"
 # htseq-count --nonunique=all -f bam -a 0 $bc"_mapped_sorted.bam" /home/smaguire/work/sRNA_circ/spades/genome_ref/GRCh38_tRNA.gtf > $bc"_tRNA_counts.txt"
-htseq-count --nonunique=all -f bam -a 0 $bc"_mapped_sorted.bam" /home/smaguire/work/sRNA_circ/spades/genome_ref/gencode.v33.annotation.gtf > $bc"_all_non_coding_counts.txt"
-
+htseq-count --nonunique=all --idattr=type.1 --type=noncoding_exon -f bam -a 0 $bc"_mapped_sorted.bam" /home/smaguire/work/unblock_remakes/data/mirexplore/mwulf_data/human_brain/altered_homo_GRCh38.gtf  > $bc"_all_non_coding_counts.txt"
