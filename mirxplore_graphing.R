@@ -31,6 +31,8 @@ data<-map(files,read_file)
 data<- bind_rows(data)
 
 options(scipen = 999)
+
+p3<-
 data %>%
   group_by(amp,ID) %>%
   summarise(mean_count = mean(normalized_reads)) %>%
@@ -42,12 +44,12 @@ data %>%
   geom_hline(yintercept=0.5,lty=2) +
   geom_hline(yintercept=1,lty=2) + 
   scale_y_log10(breaks = c(0.001,0.01,.1,0.5,1,2,10,100)) +
-  theme_cowplot() + 
+  theme_bw()+
   ylab("Mean Normalized Reads") +
   xlab(NULL) +
   guides(col="none")
   
-p3<-data %>%
+data %>%
   group_by(amp,ID) %>%
   summarise(mean_count = mean(normalized_reads)) %>%
   ungroup() %>%
